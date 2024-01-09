@@ -32,7 +32,7 @@ const Slider: React.FC<PropsType> = ({ images, interval }) => {
     <div className="flex w-[100%] overflow-hidden select-none">
       <div
         onClick={prevSlide}
-        className="w-[4%] z-10 flex items-center justify-center mr-[-4vw] hover:bg-[#131313b0] cursor-pointer"
+        className="w-[4%] z-10 flex items-center justify-center mr-[-4%] hover:bg-[#131313b0] cursor-pointer"
       >
         <button className="p-1 rounded-full">
           <span className="text-[35px] text-white">
@@ -49,7 +49,7 @@ const Slider: React.FC<PropsType> = ({ images, interval }) => {
       </div>
       <div
         onClick={nextSlide}
-        className="w-[5%] z-10 flex items-center justify-center ml-[-5vw] hover:bg-[#131313b0] cursor-pointer"
+        className="w-[4%] z-10 flex items-center justify-center ml-[-4%] hover:bg-[#131313b0] cursor-pointer"
       >
         <button className="p-1 rounded-full">
           <span className="text-[35px] text-white">

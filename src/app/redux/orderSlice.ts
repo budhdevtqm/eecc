@@ -114,7 +114,12 @@ const orderSlice = createSlice({
         state.loading = true;
       })
       .addCase(getMyOrders.fulfilled, (state, { payload }) => {
+        state.loading = false;
         state.orders = payload.data.data;
+      })
+      .addCase(getMyOrders.rejected, (state) => {
+        state.loading = false;
+        state.orders = [];
       });
     builder
       .addCase(getSingleOrder.pending, (state) => {

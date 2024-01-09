@@ -56,6 +56,7 @@ const UpdateProduct = () => {
   const fileRemoveHandler = (id: number) => {
     const filtered = removeFile(id, files);
     setFiles(filtered);
+    setFormValues({ ...formValues, images: filtered });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +67,7 @@ const UpdateProduct = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
     const updatedValues = Object.assign([], selectedFiles);
+    setFormValues({ ...formValues, images: updatedValues });
     setFiles(updatedValues);
   };
 

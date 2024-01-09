@@ -149,6 +149,9 @@ const userSlice = createSlice({
       .addCase(getAllUsers.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.users = payload.data.data;
+      }).addCase(getAllUsers.rejected, (state) => {
+        state.loading = false;
+        state.users =[];
       });
     builder
       .addCase(fetchUser.pending, (state) => {

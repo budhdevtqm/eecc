@@ -1,53 +1,3 @@
-// "use client";
-// import React, { useEffect } from "react";
-// import ImageSlider from "@/app/components/ImageSlider";
-// import PageHeader from "@/app/components/PageHeader";
-// import Wrapper from "@/app/components/Wrapper";
-// import { useParams } from "next/navigation";
-// import useFetch from "@/app/custom-hooks/useFetch";
-// import { FetchedProduct, getProduct } from "@/app/redux/productSlice";
-// import { useAppSelector } from "@/app/redux/hooks";
-// import ProductDetails from "@/app/components/ProductDetails";
-
-// const images = [
-//   "/1100.jpg",
-//   "/ri1.jpg",
-//   "/s.jpg",
-//   "/s1.webp",
-//   "/s1.webp",
-//   "/ri1.jpg",
-//   "/s1.webp",
-//   "/ri1.jpg",
-// ];
-
-// const ViewItem: React.FC = () => {
-//   const params = useParams() as { id: string };
-//   const productId = params.id;
-//   const { fetchById } = useFetch();
-
-//   const product = useAppSelector(
-//     (state) => state.product.product
-//   ) as FetchedProduct | null;
-
-//   useEffect(() => {
-//     if (productId) {
-//       fetchById(getProduct, productId);
-//     }
-//   }, []);
-
-//   console.log("produd", product);
-
-//   return (
-//     <Wrapper>
-//       <PageHeader title={product?.name ?? ""} backPath="/admin/product" />
-//       <ImageSlider images={images} />
-//       <ProductDetails userType="user" />
-//     </Wrapper>
-//   );
-// };
-
-// export default ViewItem;
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Wrapper from "@/app/components/Wrapper";
@@ -59,7 +9,7 @@ import { addToCart, getSingleProduct, Product } from "@/app/redux/homeSlice";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import ImageSlider from "./ImageSlider";
 import { getUserRole } from "@/app/common-utils/common-fns";
-import { AiOutlineStar } from "react-icons/ai";
+import toast, { Toaster } from "react-hot-toast";
 
 const ViewProduct = () => {
   const [img, setImg] = useState("");
@@ -74,8 +24,11 @@ const ViewProduct = () => {
   ) as Product | null;
 
   const addToCartHandler = async (id: number) => {
-    console.log("add-to-cart-id", id);
-    await dispatch(addToCart(`${id}`));
+    const response: any = await dispatch(addToCart(`${id}`));
+    if (response.type.includes("fulfilled")) {
+      toast.success(response.payload.data.message, { position: "top-right" });
+      return;
+    }
   };
 
   useEffect(() => {
@@ -134,40 +87,11 @@ const ViewProduct = () => {
               </button>
             </div>
           </div>
-
-          {/* {userRole === "admin" && (
-            <div>
-              <div className="flex items-center justify-center mt-4">
-                <button
-                  type="button"
-                  className="text-center flex items-center justify-center text-primary hover:bg-primary p-1 rounded border border-primary hover:text-white gap-2 px-2"
-                >
-                  <span className="text-[20px]">
-                    <AiOutlineStar />
-                  </span>
-                  <span className="font-semibold text-[14px]">Feature</span>
-                </button>
-              </div>
-            </div>
-          )} */}
         </div>
       </div>
+      <Toaster />
     </Wrapper>
   );
 };
 
 export default ViewProduct;
-
-{
-  /* <div className="flex items-center justify-end mt-4 pr-8">
-                <button
-                  type="button"
-                  onClick={() =>
-                    router.push(`/product/place-order/${product?.id}`)
-                  }
-                  className="px-3 py-1 border rounded  font-normal text-primary hover:bg-primary hover:text-white"
-                >
-                  ORDER
-                </button>
-              </div> */
-}

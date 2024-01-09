@@ -116,14 +116,22 @@ const Address: React.FC = () => {
               <p>{`${address?.city}, ${address?.state} ${address?.pin}`}</p>
             </div>
           )}
-          <div className="my-2">
-            <button
-              onClick={() => setChange(!change)}
-              className="text-blue-500 w-[100px]"
-            >
-              {change ? "Close" : "Change"}
-            </button>
-          </div>
+          {addresses.length > 0 ? (
+            <div className="my-2">
+              <button
+                onClick={() => setChange(!change)}
+                className="text-blue-500 w-[100px]"
+              >
+                {change ? "Close" : "Change"}
+              </button>
+            </div>
+          ) : (
+            <div className="my-3">
+              <Button onClick={addNewAddress} variant="primary">
+                Add address
+              </Button>
+            </div>
+          )}
         </div>
         {change && (
           <div>

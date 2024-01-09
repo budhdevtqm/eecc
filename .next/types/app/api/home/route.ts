@@ -1,4 +1,4 @@
-// File: /home/kaushik/Desktop/NODEJS/eecc/src/app/api/home/route.ts
+// File: /home/user/Budhdev Kaushik/tqm-mart/src/app/api/home/route.ts
 import * as entry from '../../../../../src/app/api/home/route.js'
 import type { NextRequest } from 'next/server.js'
 

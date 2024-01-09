@@ -18,14 +18,13 @@ import { Toaster } from "react-hot-toast";
 import Loader from "@/app/components/Loader";
 
 const UpdateCategory: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState<CategoryValues>({ name: "" });
   const [errors, setErrors] = useState<Partial<CategoryValues>>({ name: "" });
   const params = useParams() as { id: string };
   const categoryId = params.id;
   const { fetchById } = useFetch();
   const update = usePatch();
-
-  const loading = useAppSelector((state) => state.category.loading) as boolean;
 
   const category = useAppSelector(
     (state) => state.category.category
@@ -38,10 +37,12 @@ const UpdateCategory: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const validationResults = validateCategory(formValues);
     if (Object.keys(validationResults).length > 0) {
       setErrors(validationResults);
+      setLoading(false);
       return;
     }
     await update(
@@ -49,6 +50,7 @@ const UpdateCategory: React.FC = () => {
       { ...formValues, id: categoryId },
       "/admin/categories"
     );
+    setLoading(false);
   };
 
   useEffect(() => {

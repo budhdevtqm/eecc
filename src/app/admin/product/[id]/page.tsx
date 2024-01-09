@@ -11,6 +11,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import ImageSlider from "@/app/item/[id]/ImageSlider";
 import usePatch from "@/app/custom-hooks/usePatch";
 import { featureProduct } from "@/app/redux/productSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const ViewProduct = () => {
   const [img, setImg] = useState("");
@@ -24,10 +25,6 @@ const ViewProduct = () => {
   const product = useAppSelector(
     (state) => state.home.product
   ) as Product | null;
-
-  const addToCartHandler = async (id: number) => {
-    await dispatch(addToCart(`${id}`));
-  };
 
   const handleFeature = async (id: number) => {
     await update(featureProduct, id);
@@ -73,45 +70,29 @@ const ViewProduct = () => {
         </div>
         <div className="flex flex-col mx-auto w-[80%] bg-white">
           <ImageSlider setImg={setImg} images={product?.images ?? []} />
-          <div className="pb-6 flex items-center justify-between px-8">
+          <div className="pb-6 flex items-center justify-end px-8">
             <div>
               <div className="flex items-center justify-center mt-4">
                 <button
                   type="button"
-                  onClick={() => addToCartHandler(product?.id as number)}
-                  className="text-center flex items-center justify-center bg-primary p-1 rounded text-white gap-2 px-2"
+                  className="text-center flex items-center justify-center text-primary hover:bg-primary p-1 rounded border border-primary hover:text-white gap-2 px-2"
                 >
                   <span className="text-[20px]">
-                    <MdShoppingCart />
+                    <AiOutlineStar />
                   </span>
-                  <span className="font-semibold text-[14px]">ADD TO CART</span>
+                  <span
+                    className="font-semibold text-[14px]"
+                    onClick={() => handleFeature(product?.id as number)}
+                  >
+                    Feature
+                  </span>
                 </button>
               </div>
             </div>
-
-            {userRole === "admin" && (
-              <div>
-                <div className="flex items-center justify-center mt-4">
-                  <button
-                    type="button"
-                    className="text-center flex items-center justify-center text-primary hover:bg-primary p-1 rounded border border-primary hover:text-white gap-2 px-2"
-                  >
-                    <span className="text-[20px]">
-                      <AiOutlineStar />
-                    </span>
-                    <span
-                      className="font-semibold text-[14px]"
-                      onClick={() => handleFeature(product?.id as number)}
-                    >
-                      Feature
-                    </span>
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

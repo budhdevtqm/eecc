@@ -46,23 +46,22 @@ const Login: React.FC = () => {
       toast.success(message, { position: "top-right" });
       if (role === "admin") {
         router.push("/admin");
-      }
-      if (role === "user") {
+        return;
+      } else if (role === "user") {
         router.push("/");
+        return;
       }
-      return;
-    }
-    if (res.type.includes("rejected")) {
+    } else {
       toast.error(res.payload.error.message, { position: "top-right" });
     }
   };
 
   return (
-    <div className="h-full w-full px-8 flex flex-col gap-8">
-      <h1 className="text-center font-semibold text-[20px] border-b pb-1 border-primary">
+    <div className="h-full w-full px-8 flex flex-col gap-8  h-[415px]">
+      <h1 className="text-center font-semibold text-[20px] border-b pb-1 border-primary h-[45px]">
         Log In
       </h1>
-      <div className="mt-4 w-[70%] mx-auto">
+      <div className="mt-4 w-[70%] mx-auto h-[350px]">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1 my-3">
             <label className="ml-1 text-gray-500 ">Email</label>
@@ -70,7 +69,7 @@ const Login: React.FC = () => {
               type="text"
               name="email"
               placeholder="Your email!"
-              className="py-1 px-2 outline-primary text-black rounded-xl border-2"
+              className="py-1 px-2 outline-primary text-black rounded-xl border-2 lowercase"
               onChange={handleChange}
               value={formValues.email}
             />
@@ -99,7 +98,7 @@ const Login: React.FC = () => {
       </div>
 
       <p
-        className="text-center text-gray-600 cursor-pointer hover:text-blue-500 text-[12px]"
+        className="text-center text-gray-600 cursor-pointer hover:text-blue-500 text-[12px] h-[25px]"
         onClick={() => dispatch(toggleAuthMode("signup"))}
       >
         {authMode === "login"

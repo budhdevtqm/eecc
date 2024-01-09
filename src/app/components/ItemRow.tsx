@@ -1,54 +1,37 @@
 "use client";
+import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import React, { useState } from "react";
-import { MdDelete, MdEdit, MdInfo } from "react-icons/md";
-// import useDelete from "../custom-hooks/useDelete";
-// import useFetch from "../custom-hooks/useFetch";
-// import { deleteProduct, getAllProducts } from "../redux/productSlice";
-// import DeleteLoader from "./DeleteLoader";
+import { useRouter } from "next/navigation";
 
 interface PropsType {
   id: number;
-  images: string[] | [] | string;
+  image: string;
   name: string;
-  status: number;
+  quantity: number;
   price: number;
 }
 
 const ItemRow: React.FC<PropsType> = (props) => {
-  //   const { handleFetch } = useFetch();
-  //   const handleDelete = useDelete();
-  const [loading, setLoading] = useState(false);
-  const { id, images, name, status, price } = props;
-
-  const deleteHandler = async (id: number) => {
-    setLoading(true);
-    // await handleDelete(deleteProduct, id);
-    // await handleFetch(getAllProducts);
-    setLoading(false);
-  };
+  const router = useRouter();
+  const { id, image, name, quantity, price } = props;
 
   return (
-    <tr key={id}>
+    <tr
+      key={id}
+      onClick={() => router.push(`/item/${id}`)}
+      className="cursor-pointer max-h-fit min-h-[100px]"
+    >
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900 whitespace-no-wrap text-center">
-          {images && (
-            <Image
-              src={images as string}
-              // src={
-              //   images.length > 0
-              //     ? `/upload/products/${images[0]}`
-              //     : `/images/no-image.png`
-              // }
-              alt={name + "image"}
-              width={50}
-              height={50}
-            />
-          )}
+          <Image
+            src={image ? `/upload/products/${image}` : `/images/no-image.png`}
+            alt={name + "image"}
+            width={50}
+            height={50}
+          />
         </p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-[500px] text-wrap">
         {name}
       </td>
 
@@ -56,7 +39,8 @@ const ItemRow: React.FC<PropsType> = (props) => {
         <p className="text-gray-900 whitespace-no-wrap">{price}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        {status ? (
+        <p className="text-gray-900 whitespace-no-wrap">{quantity}</p>
+        {/* {status ? (
           <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
             <span
               aria-hidden
@@ -72,26 +56,8 @@ const ItemRow: React.FC<PropsType> = (props) => {
             ></span>
             <span className="relative">No</span>
           </span>
-        )}
+        )} */}
       </td>
-
-      {/* <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-right">
-        <span className="flex text-[20px] gap-3 cursor-pointer items-center justify-center">
-          <Link href={`/`}>
-            <MdInfo title="Info" />
-          </Link>
-
-          <Link href={`/`}>
-            <MdEdit title="Edit" />
-          </Link>
-
-          {loading ? (
-            <DeleteLoader loading={loading} />
-          ) : (
-            <MdDelete title="Delete" onClick={() => deleteHandler(id)} />
-          )}
-        </span>
-      </td> */}
     </tr>
   );
 };

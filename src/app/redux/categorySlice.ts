@@ -122,10 +122,15 @@ const categorySlice = createSlice({
     builder
       .addCase(getAllCategory.pending, (state) => {
         state.loading = true;
+        state.categories = [];
       })
       .addCase(getAllCategory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.categories = payload.data.data;
+      })
+      .addCase(getAllCategory.rejected, (state) => {
+        state.loading = false;
+        state.categories = [];
       });
 
     builder

@@ -9,13 +9,23 @@ export const GET = async (req: NextRequest) => {
       userEmail,
     ]);
 
-    const userId = (users as RowDataPacket[])[0].id;
+    let data;
 
-    const [myOrders] = await pool.query(
-      "SELECT * FROM orders WHERE user_id=?",
-      [userId]
-    );
-    return NextResponse.json({ data: myOrders }, { status: 200 });
+    const { id, role } = (users as RowDataPacket[])[0];
+    if (role === "user") {
+      const [myOrders] = await pool.query(
+        "SELECT * FROM orders WHERE user_id=?",
+        [id]
+      );
+      data = myOrders;
+    }
+
+    if (role === "admin") {
+      const [allOrders] = await pool.query("SELECT * FROM orders");
+      data = allOrders;
+    }
+
+    return NextResponse.json({ data }, { status: 200 });
   } catch (er) {
     return NextResponse.json(
       { message: "Something went wrong" },

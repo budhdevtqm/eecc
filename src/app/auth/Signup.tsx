@@ -23,7 +23,6 @@ const Signup: React.FC = () => {
   const dispatch = useAppDispatch();
   const authMode = useAppSelector((state) => state.auth.authMode) as string;
   const loading = useAppSelector((state) => state.auth.loading) as boolean;
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,7 +43,7 @@ const Signup: React.FC = () => {
 
     if (res.type.includes("fulfilled")) {
       toast.success("Signup successfully.", { position: "top-right" });
-      setTimeout(() => dispatch(toggleAuthMode("login")), 1000);
+      dispatch(toggleAuthMode("login"));
       return;
     }
 
@@ -57,11 +56,11 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <div className="h-full w-full px-8 flex flex-col gap-8">
-      <h1 className="text-center font-semibold text-[20px] border-b pb-1 border-primary">
+    <div className="h-full w-full px-8 flex flex-col gap-8 h-[415px]">
+      <h1 className="text-center font-semibold text-[20px] border-b pb-1 border-primary h-[45px]">
         Sign Up
       </h1>
-      <div className="mt-4 w-[70%] mx-auto">
+      <div className="mt-4 w-[70%] mx-auto h-[350px]">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1 my-3">
             <label className="ml-1 text-gray-500 ">Name</label>
@@ -81,7 +80,7 @@ const Signup: React.FC = () => {
               type="text"
               name="email"
               placeholder="Your email!"
-              className="py-1 px-2 outline-primary text-black rounded-xl border-2"
+              className="py-1 px-2 outline-primary text-black rounded-xl border-2 lowercase"
               onChange={handleChange}
               value={formValues.email}
             />
@@ -109,13 +108,13 @@ const Signup: React.FC = () => {
         </form>
       </div>
       <p
-        className="text-center text-gray-600 cursor-pointer hover:text-blue-500 text-[12px]"
+        className="text-center text-gray-600 cursor-pointer hover:text-blue-500 text-[12px] h-[25px]"
         onClick={() => dispatch(toggleAuthMode("login"))}
       >
         {authMode === "login"
           ? "New user, Please signup ?"
           : "Already have account, Please login"}
-      </p>
+      </p >
       <Toaster />
     </div>
   );
