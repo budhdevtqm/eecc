@@ -35,6 +35,7 @@ const Navbar: React.FC = () => {
               : "font-medium hover:text-primary p-2"
           }
           href={link.path}
+          prefetch
         >
           {link.label}
         </Link>

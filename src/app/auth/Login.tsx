@@ -61,7 +61,7 @@ const Login: React.FC = () => {
       <h1 className="text-center font-semibold text-[20px] border-b pb-1 border-primary h-[45px]">
         Log In
       </h1>
-      <div className="mt-4 w-[70%] mx-auto h-[350px]">
+      <div className="mt-4 w-[70%] mx-auto h-[350px] flex items-center justify-center">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-1 my-3">
             <label className="ml-1 text-gray-500 ">Email</label>

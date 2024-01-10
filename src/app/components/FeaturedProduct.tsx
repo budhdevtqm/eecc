@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "../redux/hooks";
 import { addMultiCart } from "../redux/homeSlice";
 import toast, { Toaster } from "react-hot-toast";
+import Loader from "./Loader";
 
 interface PropsType {
   name: string;
@@ -15,24 +16,32 @@ interface PropsType {
 }
 
 const FeaturedProduct: React.FC<PropsType> = ({ name, price, id, image }) => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState<string>('1');
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleIncrement = () => setValue((prev) => prev + 1);
+  const handleIncrement = () => {
+    setValue(`${Number(value) + 1}`);
+  }
   const handleDecrement = () => {
-    if (value === 1) return;
-    setValue((prev) => prev - 1);
+    if (value == '1') return;
+
+    setValue(`${Number(value) - 1}`);
   };
 
   const addToCart = async (e: React.FormEvent<HTMLFormElement>, id: number) => {
     e.preventDefault();
+    setLoading(true);
     const response: any = await dispatch(addMultiCart({ id, quantity: value }));
     if (response.type.includes("fulfilled")) {
       toast.success(response.payload.data.message, { position: "top-right" });
-      setValue(1);
+      setValue('1');
+      setLoading(false);
       return;
     }
+    setLoading(false);
+
   };
 
   return (
@@ -58,17 +67,16 @@ const FeaturedProduct: React.FC<PropsType> = ({ name, price, id, image }) => {
               <button
                 type="button"
                 onClick={handleDecrement}
-                disabled={value === 1 ? true : false}
-                className={`border border-primary shadow px-2 py-1 text-primary rounded hover:bg-primary hover:text-white mr-2 ${
-                  value === 1 ? "cursor-not-allowed" : "cursor-pointer"
-                }`}
+                disabled={value == '1' ? true : false}
+                className={`border border-primary shadow px-2 py-1 text-primary rounded hover:bg-primary hover:text-white mr-2 ${value == '1' ? "cursor-not-allowed" : "cursor-pointer"
+                  }`}
               >
                 -
               </button>
               <input
-                type="number"
+                type="text"
                 value={value}
-                className="w-[50px] h-[30px] border border-gray-300 rounded outline-primary px-2 py-[2px]"
+                className="w-[37px] h-[30px] border border-gray-300 rounded outline-primary px-2 py-[2px]"
               />
               <button
                 type="button"
@@ -79,7 +87,7 @@ const FeaturedProduct: React.FC<PropsType> = ({ name, price, id, image }) => {
               </button>
             </div>
             <div className="flex items-center justify-center mt-2">
-              <button
+              {loading ? <Loader loading={loading} /> : <button
                 className="flex gap-2  items-center justify-center text-[16px] px-2 py-1 border border-primary rounded text-primary hover:text-white hover:bg-primary"
                 type="submit"
               >
@@ -87,7 +95,7 @@ const FeaturedProduct: React.FC<PropsType> = ({ name, price, id, image }) => {
                   <FaCartPlus />
                 </span>
                 ADD TO CART
-              </button>
+              </button>}
             </div>
           </form>
         </div>

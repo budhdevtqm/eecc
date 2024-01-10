@@ -8,17 +8,16 @@ import useFetch from "@/app/custom-hooks/useFetch";
 import { addToCart, getSingleProduct, Product } from "@/app/redux/homeSlice";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import ImageSlider from "./ImageSlider";
-import { getUserRole } from "@/app/common-utils/common-fns";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "@/app/components/Loading";
 
 const ViewProduct = () => {
   const [img, setImg] = useState("");
   const { fetchById } = useFetch();
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const id = useParams().id as string;
-  const userRole = getUserRole();
 
+  const loading = useAppSelector((state) => state.home.loading) as boolean;
   const product = useAppSelector(
     (state) => state.home.product
   ) as Product | null;
@@ -43,7 +42,7 @@ const ViewProduct = () => {
 
   return (
     <Wrapper>
-      <div className="flex items-center justify-center">
+      {loading ? <Loading /> : <> <div className="flex items-center justify-center">
         <div className="  bg-white p-4 rounded w-[80%]">
           <div className="flex w-full mt-4 w-[80%] mx-auto border-t-2 border-primary py-2  ">
             <div className="ml-4">
@@ -70,25 +69,28 @@ const ViewProduct = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mx-auto w-[80%] bg-white">
-        <ImageSlider setImg={setImg} images={product?.images ?? []} />
-        <div className="pb-6 flex items-center justify-end px-8">
-          <div>
-            <div className="flex items-center justify-center mt-4">
-              <button
-                type="button"
-                onClick={() => addToCartHandler(product?.id as number)}
-                className="text-center flex items-center justify-center bg-primary p-1 rounded text-white gap-2 px-2"
-              >
-                <span className="text-[20px]">
-                  <MdShoppingCart />
-                </span>
-                <span className="font-semibold text-[14px]">ADD TO CART</span>
-              </button>
+        <div className="flex flex-col mx-auto w-[80%] bg-white">
+          <ImageSlider setImg={setImg} images={product?.images ?? []} />
+          <div className="pb-6 flex items-center justify-end px-8">
+            <div>
+              <div className="flex items-center justify-center mt-4">
+                <button
+                  type="button"
+                  onClick={() => addToCartHandler(product?.id as number)}
+                  className="text-center flex items-center justify-center bg-primary p-1 rounded text-white gap-2 px-2"
+                >
+                  <span className="text-[20px]">
+                    <MdShoppingCart />
+                  </span>
+                  <span className="font-semibold text-[14px]">ADD TO CART</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
+      }
+
       <Toaster />
     </Wrapper>
   );

@@ -28,9 +28,9 @@ interface User {
 
 export const POST = async (req: NextRequest) => {
   try {
-    const { id, quantity } = await req.json();
+    const { id, quantity: qty } = await req.json();
     const userEmail = req.headers.get("userEmail");
-
+    const quantity = Number(qty);
     const [products] = await pool.query(
       "SELECT * FROM products WHERE id=? LIMIT 1",
       [id]

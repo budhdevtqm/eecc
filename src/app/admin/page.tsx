@@ -9,8 +9,8 @@ const AdminPage: React.FC = () => {
     <div className="h-full">
       <PageHeader title="Dashboard" />
       <div className="w-[80%] mx-auto flex flex-wrap my-4">
-        {images.map((img: string) => (
-          <div className="w-[45%] h-[320px] px-4 py-4 flex items-center justify-center bg-white m-2 rounded shadow">
+        {images.map((img: string, idx) => (
+          <div key={idx} className="w-[45%] h-[320px] px-4 py-4 flex items-center justify-center bg-white m-2 rounded shadow">
             <Image
               src={img}
               alt="image"

@@ -14,16 +14,20 @@ import {
   getAllCartItems,
   setCartProducts,
 } from "../redux/cartSlice";
+import Empty from "../components/admin/Empty";
+import Loading from "../components/Loading";
 
 const CartPage: React.FC = () => {
   const [myCart, setMyCart] = useState<CartItem[] | []>([]);
   const [total, setTotal] = useState<number>(0);
+
 
   const { handleFetch } = useFetch();
   const handleDelete = useDelete();
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const loading = useAppSelector((state) => state.cart.loading) as boolean;
   const cartItems = useAppSelector((state) => state.cart.cartItems) as
     | CartItem[]
     | [];
@@ -65,34 +69,35 @@ const CartPage: React.FC = () => {
   return (
     <Wrapper>
       <PageHeader title="My Cart" />
-      <div>
-        {myCart.length > 0 ? (
-          myCart.map((i: CartItem) => (
-            <CartCard
-              key={i.id}
-              item={i}
-              remover={deleteHandler}
-              myCart={myCart}
-              setMyCart={setMyCart}
-              setTotal={setTotal}
-            />
-          ))
-        ) : (
-          <div className="flex items-center justify-center min-h-[300px]">
-            <h1 className="font-bold text-[20px]">No Cart Items Yet!</h1>
+      {loading && cartItems.length === 0 && <Loading />}
+      {!loading && cartItems.length === 0 && <Empty label="No Cart Items Yet!" />}
+      {!loading && cartItems.length > 0 && <>
+        <div>
+          {
+            myCart.map((i: CartItem) => (
+              <CartCard
+                key={i.id}
+                item={i}
+                remover={deleteHandler}
+                myCart={myCart}
+                setMyCart={setMyCart}
+                setTotal={setTotal}
+              />
+            ))
+          }
+        </div>
+        {total !== 0 && (
+          <div className="w-[90%] mx-auto flex items-center justify-end my-4">
+            <div className="w-[60%] flex items-center justify-between pr-36">
+              <Button variant="primary" onClick={goToPlaceOrder}>
+                Order Now
+              </Button>
+              <span className="font-semibold text-[18px]">{`₹ ${total}`}</span>
+            </div>
           </div>
         )}
-      </div>
-      {total !== 0 && (
-        <div className="w-[90%] mx-auto flex items-center justify-end my-4">
-          <div className="w-[60%] flex items-center justify-between pr-36">
-            <Button variant="primary" onClick={goToPlaceOrder}>
-              Order Now
-            </Button>
-            <span className="font-semibold text-[18px]">{`₹ ${total}`}</span>
-          </div>
-        </div>
-      )}
+      </>}
+
     </Wrapper>
   );
 };

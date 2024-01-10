@@ -1,9 +1,5 @@
 "use client";
 import React, { useEffect } from "react";
-import Wrapper from "@/app/components/Wrapper";
-import Image from "next/image";
-import { MdArrowBackIosNew } from "react-icons/md";
-import Link from "next/link";
 import useFetch from "../custom-hooks/useFetch";
 import { Profile, getMyDetails } from "../redux/profileSlice";
 import { useAppSelector } from "../redux/hooks";

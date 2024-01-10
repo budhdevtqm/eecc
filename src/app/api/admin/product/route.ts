@@ -64,7 +64,6 @@ export const POST = async (req: NextRequest) => {
       { status: 201 }
     );
   } catch (er) {
-    console.log("sdjflsdf", er)
     return NextResponse.json(
       { message: "something went wrong" },
       { status: 400 }

@@ -191,7 +191,7 @@ export const getAllProducts = createAsyncThunk(
   "/fetch-all-products",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("/api/home");
+      const response = await axios.get("/api/home", headers);
       return response;
     } catch (er) {
       if (axios.isAxiosError(er)) {
@@ -207,7 +207,7 @@ export const getSingleProduct = createAsyncThunk(
   "/get-product",
   async (id: string, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`/api/home/${id}`);
+      const response = await axios.get(`/api/home/${id}`, headers);
       return response;
     } catch (er) {
       if (axios.isAxiosError(er)) {
@@ -237,7 +237,7 @@ export const addToCart = createAsyncThunk(
 
 export const addMultiCart = createAsyncThunk(
   "/add-to-cart",
-  async (values: { id: number; quantity: number }, { rejectWithValue }) => {
+  async (values: { id: number; quantity: string }, { rejectWithValue }) => {
     try {
       const { id, quantity } = values;
       const response = await axios.post(
@@ -297,6 +297,10 @@ const homeSlice = createSlice({
       .addCase(getAllProducts.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.products = payload.data.data;
+      })
+      .addCase(getAllProducts.rejected, (state) => {
+        state.loading = false;
+        state.products = [];
       });
     builder
       .addCase(getSingleProduct.pending, (state) => {
@@ -305,6 +309,10 @@ const homeSlice = createSlice({
       .addCase(getSingleProduct.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.product = payload.data.data;
+      })
+      .addCase(getSingleProduct.rejected, (state) => {
+        state.loading = false;
+        state.product = null;
       });
 
     builder

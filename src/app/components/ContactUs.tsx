@@ -32,8 +32,11 @@ const ContactUs: React.FC = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-[80vh]">
-      <div className="w-[50%] bg-white mx-auto flex items-center justify-center flex-col pt-4 pb-8 px-8">
+    <div className="flex flex-col items-center justify-center min-h-[80vh]">
+      <div className="my-4 text-gray-600">
+        <h1 className="font-bold text-[18px]">Get in Touch</h1>
+      </div>
+      <div className="w-[50%] bg-white mx-auto flex items-center justify-center flex-col pt-4 pb-8 px-8 shadow border border-gray-200 rounded-lg shadow-lg">
         <form className="my-4" onSubmit={handleSubmit}>
           <div className="flex gap-4 my-2">
             <div className="w-[50%] flex flex-col">
