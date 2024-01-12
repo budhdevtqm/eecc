@@ -1,14 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { userRoutes } from "./routes";
 import { usePathname, useRouter } from "next/navigation";
 import { getUserRole, getUserEmail } from "../common-utils/common-fns";
 import Link from "next/link";
 
-interface Route {
-  label: string;
-  path: string;
-}
 
 const Navbar: React.FC = () => {
   const pathName = usePathname();

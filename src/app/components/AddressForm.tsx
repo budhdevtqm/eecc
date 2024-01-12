@@ -16,8 +16,6 @@ import {
   updateAddress,
 } from "../redux/homeSlice";
 import { validateAddress } from "../common-utils/validations";
-import usePost from "../custom-hooks/usePost";
-import usePatch from "../custom-hooks/usePatch";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import useFetch from "../custom-hooks/useFetch";
 import toast, { Toaster } from "react-hot-toast";
@@ -213,7 +211,6 @@ const AddressForm: React.FC<PropsType> = ({ open, onClose, mode, setOpen }) => {
               onChange={handleChange}
               value={formValues.area}
             />
-            {/* <FormError message={errors.area ?? ""} /> */}
           </div>
 
           <div className="flex flex-col gap-1 my-3">
@@ -239,7 +236,6 @@ const AddressForm: React.FC<PropsType> = ({ open, onClose, mode, setOpen }) => {
               onChange={handleChange}
               value={formValues.landmark}
             />
-            {/* <FormError message={errors.landmark ?? ""} /> */}
           </div>
 
           <div className="flex flex-col gap-1 my-3">

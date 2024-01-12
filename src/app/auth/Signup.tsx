@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { validateSignup } from "@/app/common-utils/validations";
 import FormError from "@/app/components/FormError";
 import { handleSignup } from "../redux/authSlice";
-import { useRouter } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
 import Loader from "../components/Loader";
 

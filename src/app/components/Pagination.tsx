@@ -1,8 +1,5 @@
+'use client'
 import React from "react";
-import {
-  IoIosArrowDropleftCircle,
-  IoMdArrowDroprightCircle,
-} from "react-icons/io";
 
 interface PaginationProps {
   totalPages: number;
@@ -23,7 +20,6 @@ const Pagination: React.FC<PaginationProps> = ({
     return pages;
   };
 
-  console.log(generatePageNumbers());
 
   return (
     <>

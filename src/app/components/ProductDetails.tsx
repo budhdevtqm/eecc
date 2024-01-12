@@ -1,22 +1,3 @@
-// "use client";
-// import React from "react";
-
-// interface PropsType {
-//   userType: string;
-// }
-
-// const price = 123412;
-
-// const ProductDetails: React.FC<PropsType> = () => {
-//   return (
-//     <div className="bg-white rounded-lg shadow-lg py-2">
-//       <div></div>
-//     </div>
-//   );
-// };
-
-// export default ProductDetails;
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Wrapper from "@/app/components/Wrapper";

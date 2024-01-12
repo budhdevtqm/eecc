@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper";
 import PageHeader from "../components/PageHeader";
-import Image from "next/image";
 import useFetch from "../custom-hooks/useFetch";
 import {
   cancelOrder,
@@ -17,28 +16,22 @@ import Loader from "../components/Loader";
 import Loading from "../components/Loading";
 import Empty from "../components/admin/Empty";
 import Pagination from "../components/Pagination";
+import OrderRow from "../components/OrderRow";
 
 const Orders: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [orders, setOrders] = useState<Order[] | []>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loader, setLoader] = useState(false);
 
   const dispatch = useAppDispatch();
-  const handleDelete = useDelete();
 
   const loading = useAppSelector((state) => state.order.loading) as boolean;
   const myOrders = useAppSelector((state) => state.order.orders) as
     | Order[]
     | [];
 
-  const handleOrderCancel = async (id: number) => {
-    setLoader(true);
-    await handleDelete(cancelOrder, id as number);
-    await handleFetch(getMyOrders);
-    setLoader(false);
-  };
+ 
 
   const handleOpen = (id: number) => {
     dispatch(setOrderId(id));
@@ -71,15 +64,17 @@ const Orders: React.FC = () => {
     dispatch(setOrderId(null));
   }, []);
 
+
+
   return (
     <Wrapper>
       <PageHeader title="Orders" />
       {open && <OrderModal open={open} onClose={handleClose} />}
       {loading && myOrders.length === 0 && <Loading />}
       {!loading && myOrders.length === 0 && <Empty label="No Orders Yet!" />}
-      {!loading && myOrders.length > 0 && (
+      {!open && myOrders.length > 0 && (
         <>
-          <div className="my-8 p-2 border-t-2 border-primary min-h-[590px]">
+          <div className="my-8 p-2 border-t-2 border-primary min-h-[63vh]">
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
@@ -99,60 +94,8 @@ const Orders: React.FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {orders.map((o: any, index) => (
-                  <tr key={index}>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        <Image
-                          src={`/upload/products/${o.image}`}
-                          alt={o.name + "image"}
-                          width={50}
-                          height={50}
-                        />
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      {o.name}
-                    </td>
-
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {o.amount}
-                      </p>
-                    </td>
-
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <p className="text-gray-900 whitespace-no-wrap">
-                        {o.quantity}
-                      </p>
-                    </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                      <div className="flex items-center gap-4">
-                        <button
-                          type="button"
-                          onClick={() => handleOpen(o.id)}
-                          className="px-2 py-1 border border-primary rounded-md text-primary hover:text-white hover:bg-primary"
-                        >
-                          Info
-                        </button>
-                        {o.is_cancelled ? (
-                          <p className="text-gray-500 font-semibold">
-                            Cancelled
-                          </p>
-                        ) : loader ? (
-                          <Loader loading={loader} />
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => handleOrderCancel(o.id)}
-                            className="px-2 py-1 border border-errorColor rounded-md text-errorColor hover:text-white hover:bg-errorColor"
-                          >
-                            Cancel
-                          </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
+                {orders.map((o: any) => (
+                  <OrderRow id={o.id} name={o.name} amount={o.amount} is_cancelled={o.is_cancelled} handleOpen={handleOpen} image={o.image} quantity={o.quantity} />
                 ))}
               </tbody>
             </table>

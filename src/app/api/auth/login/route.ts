@@ -1,4 +1,3 @@
-"use server";
 import pool from "@/dbConfig/db";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";

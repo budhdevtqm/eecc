@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import Button from "../components/Button";
 import { LoginValues, handleLogin, toggleAuthMode } from "../redux/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";

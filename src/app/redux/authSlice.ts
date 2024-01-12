@@ -83,10 +83,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // handleLogout: (state) => {
-    //   localStorage.removeItem("token");
-    //   localStorage.removeItem("role");
-    // },
     toggleAuthMode: (state, action) => {
       state.authMode = action.payload;
     },

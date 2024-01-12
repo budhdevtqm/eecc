@@ -8,8 +8,6 @@ interface PropsType {
 const ImageSlider: React.FC<PropsType> = ({ images }) => {
   const [selected, setSelected] = useState<string | undefined>(undefined);
 
-  console.log("images", images);
-
   useEffect(() => {
     if ((images as string[] | []).length > 0) {
       setSelected(images[0]);

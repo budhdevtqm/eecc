@@ -46,7 +46,6 @@ interface Address {
   created_at: string;
 }
 
-// console.log("env", process.env);
 
 const mailTransporter = mailer.createTransport({
   host: "smtp.gmail.com",

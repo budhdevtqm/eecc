@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Wrapper from "@/app/components/Wrapper";
 import Image from "next/image";
 import { MdShoppingCart } from "react-icons/md";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import useFetch from "@/app/custom-hooks/useFetch";
 import { addToCart, getSingleProduct, Product } from "@/app/redux/homeSlice";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";

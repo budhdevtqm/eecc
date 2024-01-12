@@ -82,7 +82,7 @@ const Orders: React.FC = () => {
       {!loading && orders.length === 0 && <Empty label="No Orders Yet!" />}
       {orderConditon && (
         <div>
-          <div className=" p-2 border-t-2 border-primary min-h-[630px]">
+          <div className=" p-2 border-t-2 border-primary min-h-[69vh]">
             <table className="min-w-full leading-normal">
               <thead>
                 <tr>
@@ -114,7 +114,7 @@ const Orders: React.FC = () => {
                         />
                       </p>
                     </td>
-                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-[400px]">
                       {o.name}
                     </td>
 

@@ -1,4 +1,4 @@
-
+"use client";
 import Image from "next/image";
 import React from "react";
 import PageHeader from "../components/PageHeader";

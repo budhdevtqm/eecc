@@ -7,7 +7,6 @@ import { Product, addToCart } from "./redux/homeSlice";
 import usePost from "./custom-hooks/usePost";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "./redux/hooks";
 import Loader from "./components/Loader";
 
 interface ProductCartProps {

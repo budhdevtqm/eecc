@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { AddressTypes, setAddressId } from "../redux/homeSlice";
+import { AddressTypes } from "../redux/homeSlice";
 import { MdDelete, MdEdit } from "react-icons/md";
 interface PropsTypes {
   address: AddressTypes;

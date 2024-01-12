@@ -71,7 +71,6 @@ const ProductFilter: React.FC = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Filter-search-vlaues", searchValues);
   };
 
   return (

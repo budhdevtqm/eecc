@@ -25,7 +25,6 @@ const CreateStore: React.FC = () => {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("store-values", formValues);
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

@@ -47,10 +47,15 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    if (pathname.includes("admin") && admin) {
+    if (pathname.includes("/admin") && admin) {
       return NextResponse.next();
     }
-    return NextResponse.redirect(new URL("/", url));
+    if (userRole === "user") {
+      return NextResponse.redirect(new URL("/", url));
+    }
+    if (userRole === "admin") {
+      return NextResponse.redirect(new URL("/admin", url));
+    }
   } catch (error) {
     return NextResponse.redirect(new URL("/auth", url));
   }
@@ -59,14 +64,12 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     "/",
+    "/about",
+    "/contact",
+    "/my-orders",
+    "/my-profile",
     "/cart/:path*",
     "/item/:path*",
-    "/my-orders",
-    "/contact",
-    "/about",
-    "/my-profile",
     "/admin/:path*",
   ],
 };
-
-// "/admin/:path*", "/", "/cart/:path*"

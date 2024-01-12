@@ -46,7 +46,7 @@ const Products: React.FC = () => {
       {!loading && products.length === 0 && <Empty label="No Products Yet!" />}
       {!loading && products.length > 0 && (
         <>
-          <div className="min-h-[630px]">
+          <div className="min-h-[70vh]">
             <table className="min-w-full leading-normal ">
               <thead>
                 <tr>

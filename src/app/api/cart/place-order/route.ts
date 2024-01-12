@@ -164,8 +164,6 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ message: "Order Placed" }, { status: 200 });
   } catch (er) {
-    console.log("erererererer", er);
-
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 400 }

@@ -74,7 +74,6 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ message: "Added to cart" }, { status: 201 });
   } catch (er) {
-    console.log("Added to cart ERROR", er);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 400 }

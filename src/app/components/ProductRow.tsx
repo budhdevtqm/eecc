@@ -45,7 +45,7 @@ const ProductRow: React.FC<PropsType> = (props) => {
           />
         </p>
       </td>
-      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-[500px]">
         {name}
       </td>
 

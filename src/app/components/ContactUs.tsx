@@ -22,7 +22,6 @@ const ContactUs: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(formValues);
     e.preventDefault();
     setErrors({});
     const validationResults = contactValidation(formValues);

@@ -1,5 +1,5 @@
 "use client";
-import React, { CSSProperties } from "react";
+import React from "react";
 import Button from "./Button";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { handleLogout } from "../redux/authSlice";

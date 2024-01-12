@@ -53,7 +53,7 @@ const AllProducts: React.FC = () => {
       {loading && products.length === 0 && <Loading />}
       {!loading && products.length === 0 && <Empty label="No Products Yet!" />}
       {!loading && products.length > 0 && <>
-        <div className="min-h-[535px]">
+        <div className="min-h-[66vh]">
           <table className="min-w-full leading-normal">
             <thead>
               <tr>
@@ -127,10 +127,3 @@ const AllProducts: React.FC = () => {
 };
 
 export default AllProducts;
-{/* <ItemRow
-  id={product.id}
-  name={product.name}
-  price={product.price}
-  quantity={product.quantity}
-  image={product.images[0]}
-/>; */}

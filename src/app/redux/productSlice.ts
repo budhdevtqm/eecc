@@ -1,3 +1,4 @@
+'use client'
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { headers } from "../common-utils/common-fns";

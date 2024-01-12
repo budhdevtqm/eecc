@@ -24,10 +24,11 @@ const Home: React.FC = () => {
       const filterFeatured = products.filter(
         (item: Product) => item.is_featured === 1
       );
+
       const reversed = filterFeatured.reverse();
 
       if (reversed.length > 6) {
-        setFeatured(reversed.slice(0, 5));
+        setFeatured(reversed.slice(0, 6));
         return;
       }
 
@@ -46,7 +47,7 @@ const Home: React.FC = () => {
           <Slider images={images} interval={3000} />
         </div>
         <div className="my-4">
-          <div className="flex gap-4 flex-wrap w-[95%] mx-auto py-4 items-center ">
+          <div className="flex gap-4 flex-wrap w-[95%] mx-auto py-4 items-center justify-center">
             {featured.length > 0 &&
               featured.map((item: Product) => (
                 <FeaturedProduct

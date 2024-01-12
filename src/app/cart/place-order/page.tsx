@@ -9,7 +9,6 @@ import Address from "@/app/components/Address";
 import Payment from "@/app/cart/place-order/CheckoutForm";
 import { AddressTypes, getMyAddresses } from "@/app/redux/homeSlice";
 
-type AddressId = number | null;
 
 const PlaceOrder: React.FC = () => {
   const [amount, setAmount] = useState(0);

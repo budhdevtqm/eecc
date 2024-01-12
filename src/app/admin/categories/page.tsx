@@ -49,7 +49,7 @@ const Categories: React.FC = () => {
       )}
       {!loading && categories.length > 0 && (
         <div>
-          <div className="min-h-[590px]">
+          <div className="min-h-[69vh]">
             <TableWrapper>
               <table className="min-w-full leading-normal">
                 <thead>

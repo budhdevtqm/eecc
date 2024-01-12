@@ -75,7 +75,6 @@ const OrderModal: React.FC<OrderModalProps> = ({ open, onClose }) => {
                 </div>
               </div>
             </div>
-            {/* order Information */}
             <div>
               <div className="p-2">
                 <h1 className="font-bold text-[20px]">Order Information</h1>
